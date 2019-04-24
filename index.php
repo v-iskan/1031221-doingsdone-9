@@ -38,13 +38,13 @@ $tasks = [
     ],
     [
         'task' => 'Купить корм для кота',
-        'dateOfComplition' => 'Нет',
+        'dateOfComplition' => null,
         'category' => 'Домашние дела',
         'done' => false,
     ],
     [
         'task' => 'Заказать пиццу',
-        'dateOfComplition' => 'Нет',
+        'dateOfComplition' => null,
         'category' => 'Домашние дела',
         'done' => false,
     ]
@@ -130,7 +130,7 @@ $tasks = [
 
                 <table class="tasks">
                     <?php foreach ($tasks as $val): ?>
-                    <?php if ($show_complete_tasks == 1 and $done == true): ?>
+                    <?php if ($show_complete_tasks == 1 and $val['dane'] == true): ?>
                     <tr class="tasks__item task task--completed">
                         <td class="task__select">
                             <label class="checkbox task__checkbox">
