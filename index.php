@@ -91,12 +91,12 @@ $tasks = [
 
                 <nav class="main-navigation">
                     <ul class="main-navigation__list">
-                        <?php foreach ($tasks as $val): ?>
+                        <?php foreach ($projects as $val): ?>
                         <li class="main-navigation__list-item">
                             <a class="main-navigation__list-item-link" href="#"><?=$val; ?></a>
                             <span class="main-navigation__list-item-count">0</span>
                         </li>
-
+                        <?php endforeach; ?>
                     </ul>
                 </nav>
 
@@ -129,7 +129,6 @@ $tasks = [
                 </div>
 
                 <table class="tasks">
-                    <?php if ($show_complete_tasks == 1): ?>
                     <?php foreach ($tasks as $val): ?>
                     <?php if ($show_complete_tasks == 1 and $val['done'] == true): ?>
                     <tr class="tasks__item task task--completed">
@@ -147,7 +146,7 @@ $tasks = [
                         <td class="task__select">
                             <label class="checkbox task__checkbox">
                                 <input class="checkbox__input visually-hidden task__checkbox" type="checkbox" value="1">
-                                <span class="checkbox__text">Сделать главную страницу Дела в порядке</span>
+                                <span class="checkbox__text"><?=$val['task']; ?></span>
                             </label>
                         </td>
 
@@ -155,7 +154,7 @@ $tasks = [
                             <a class="download-link" href="#">Home.psd</a>
                         </td>
 
-                        <td class="task__date"></td>
+                        <td class="task__date"><?=$val['dateOfComplition']; ?></td>
                     </tr>
                     <?php endif; ?>
                     <?php endforeach; ?>
