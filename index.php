@@ -1,22 +1,27 @@
 <?php
-error_reporting(E_ALL);// показывать или нет выполненные задачи
+// показывать или нет выполненные задачи
 $show_complete_tasks = rand(0, 1);
 ?>
 
 <?php
 $projects = [
-    "Входящие","Учеба","Работа","Домашние дела","Авто"
+    "Входящие",
+    "Учеба",
+    "Работа",
+    "Домашние дела",
+    "Авто"
 ];
 ?>
 
 <?php
 require_once('helpers.php');
+require_once('functions.php'); // подключение файла с функциями
 // массив пунктами меню проектов
 $tasks = [
     [
-        'task' => 'Собеседование в IT компании',
+        'task' =>             'Собеседование в IT компании',
         'dateOfComplition' => '01.12.2018',
-        'category' => 'Работа',
+        'category' =>         'Работа',
         'done' => false,
     ],
     [
@@ -52,12 +57,24 @@ $tasks = [
 ];
 
 
-// двумерный массив задач с параметрами
+// подключение содержимое main - шаблон templates\index.php
 
-$contetnPage = include_template('index.php', ['task' => $tasks]);
+$contetnPage = include_template('index.php',
+    [
+        'tasks'               => $tasks,
+        'show_complete_tasks' => $show_complete_tasks,
+    ]
+);
 
-// окончательный HTML код
+// окончательный HTML код шаблона templates\layout.php
 
-$namePage = include_template('layout.php', ['content' => $contetnPage]);
+$namePage = include_template('layout.php',
+    [
+        'content'  => $contetnPage,
+        'title'    => "Дела в порядке",
+        'projects' => $projects,
+        'tasks'    => $tasks,
+    ]
+);
 
-print($namePage);
+print_r($namePage);
