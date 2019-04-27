@@ -1,4 +1,9 @@
 <?php
+// установили часовой пояс Самара +4GMT
+date_default_timezone_set("Europe/Samara");
+?>
+
+<?php
 // показывать или нет выполненные задачи
 $show_complete_tasks = rand(0, 1);
 ?>

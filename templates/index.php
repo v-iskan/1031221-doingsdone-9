@@ -23,19 +23,8 @@
 
 <table class="tasks">
     <?php foreach ($tasks as $val): ?>
-        <?php if ($show_complete_tasks == 1 and $val['done'] == true): ?>
-            <tr class="tasks__item task task--completed">
-                <td class="task__select">
-                    <label class="checkbox task__checkbox">
-                        <input class="checkbox__input visually-hidden" type="checkbox" checked>
-                        <span class="checkbox__text"><?=$val['task']; ?></span>
-                    </label>
-                </td>
-                <td class="task__date"><?=$val['dateOfComplition']; ?></td>
-                <td class="task__controls"></td>
-            </tr>
-        <?php elseif ($show_complete_tasks == 0): ?>
-            <tr class="tasks__item task">
+        <?php if ($show_complete_tasks == 1 || ($show_complete_tasks == 0 && $val['done'] == false)): ?>
+            <tr class="tasks__item task<? if ($val['done'] == true): ?> task--completed<? endif; ?>">
                 <td class="task__select">
                     <label class="checkbox task__checkbox">
                         <input class="checkbox__input visually-hidden task__checkbox" type="checkbox" value="1">
