@@ -12,3 +12,10 @@ function taskCounting($tasks, $projects)
     }
     return $count;
 };
+
+function esc($val)
+{
+    $text = htmlspecialchars($val);
+
+    return $text;
+};
