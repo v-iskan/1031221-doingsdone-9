@@ -28,7 +28,7 @@
                 <td class="task__select">
                     <label class="checkbox task__checkbox">
                         <input class="checkbox__input visually-hidden task__checkbox" type="checkbox" value="1">
-                        <span class="checkbox__text"><?=$val['task']; ?><?=esc($val);?></span>
+                        <span class="checkbox__text"><?=$val['task']; ?><?=esc($var);?></span>
                     </label>
                 </td>
 
@@ -36,7 +36,7 @@
                     <a class="download-link" href="#">Home.psd</a>
                 </td>
 
-                <td class="task__date"><?=$val['dateOfComplition']; ?><?=esc($val);?></td>
+                <td class="task__date"><?=$val['dateOfComplition']; ?><?=esc($var);?></td>
             </tr>
         <?php endif; ?>
     <?php endforeach; ?>

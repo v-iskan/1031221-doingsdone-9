@@ -13,9 +13,11 @@ function taskCounting($tasks, $projects)
     return $count;
 };
 
-function esc($val)
+function esc($var)
 {
-    $text = htmlspecialchars($val);
+    $text = htmlspecialchars($var);
 
     return $text;
 };
+
+
