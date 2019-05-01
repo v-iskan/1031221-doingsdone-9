@@ -1,6 +1,7 @@
 <?php
 // установили часовой пояс Самара +4GMT
 date_default_timezone_set("Europe/Samara");
+setlocale(LC_TIME,"ru_RUS.utf8");
 ?>
 
 <?php
@@ -43,7 +44,7 @@ $tasks = [
     ],
     [
         'task' => 'Встреча с другом',
-        'dateOfComplition' => '22.12.2018',
+        'dateOfComplition' => '22.12.2019',
         'category' => 'Входящие',
         'done' => false,
     ],

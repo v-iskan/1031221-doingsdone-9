@@ -24,7 +24,7 @@
 <table class="tasks">
     <?php foreach ($tasks as $val): ?>
         <?php if ($show_complete_tasks == 1 || ($show_complete_tasks == 0 && $val['done'] == false)): ?>
-            <tr class="tasks__item task<? if ($val['done'] == true): ?> task--completed<? endif; ?>">
+            <tr class="tasks__item task<? if ($val['done'] == true): ?> task--completed<? endif; ?><? if (dateDiff($val['dateOfComplition']) <= 1): ?> task--important<? endif; ?>">
                 <td class="task__select">
                     <label class="checkbox task__checkbox">
                         <input class="checkbox__input visually-hidden task__checkbox" type="checkbox" value="1">
