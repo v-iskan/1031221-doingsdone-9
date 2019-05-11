@@ -16,7 +16,8 @@
 
     <label class="checkbox">
         <!--добавить сюда аттрибут "checked", если переменная $show_complete_tasks равна единице-->
-        <input class="checkbox__input visually-hidden show_completed" type="checkbox"<?php if ($show_complete_tasks == 1): ?> checked<?php endif; ?>>
+        <input class="checkbox__input visually-hidden show_completed"
+               type="checkbox"<?php if ($show_complete_tasks == 1): ?> checked<?php endif; ?>>
         <span class="checkbox__text">Показывать выполненные</span>
     </label>
 </div>
@@ -24,11 +25,11 @@
 <table class="tasks">
     <?php foreach ($tasks as $val): ?>
         <?php if ($show_complete_tasks == 1 || ($show_complete_tasks == 0 && $val['done'] == false)): ?>
-            <tr class="tasks__item task<? if ($val['done'] == true): ?> task--completed<? endif; ?><? if (dateDiff($val['dateOfComplition']) <= 1 && $val['dateOfComplition'] !== null && $val['done'] == false): ?> task--important<? endif; ?>">
+            <tr class="tasks__item task<? if ($val['done'] == true): ?> task--completed<? endif; ?><? if (dateDiff($val['date_of_complition']) <= 1 && $val['date_of_complition'] !== null && $val['done'] == false): ?> task--important<? endif; ?>">
                 <td class="task__select">
                     <label class="checkbox task__checkbox">
                         <input class="checkbox__input visually-hidden task__checkbox" type="checkbox" value="1">
-                        <span class="checkbox__text"><?=$val['task']; ?><?=esc($var);?></span>
+                        <span class="checkbox__text"><?= $val['name_task']; ?><?= esc($var); ?></span>
                     </label>
                 </td>
 
@@ -36,7 +37,7 @@
                     <a class="download-link" href="#">Home.psd</a>
                 </td>
 
-                <td class="task__date"><?=$val['dateOfComplition']; ?><?=esc($var);?></td>
+                <td class="task__date"><?= $val['date_of_complition']; ?><?= esc($var); ?></td>
             </tr>
         <?php endif; ?>
     <?php endforeach; ?>

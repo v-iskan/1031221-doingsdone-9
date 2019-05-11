@@ -1,23 +1,44 @@
 <?php
-// установили часовой пояс Самара +4GMT
-date_default_timezone_set("Europe/Samara");
-setlocale(LC_TIME,"ru_RUS.utf8");
-?>
-
-<?php
-// показывать или нет выполненные задачи
+error_reporting(E_ALL);// показывать или нет выполненные задачи
 $show_complete_tasks = rand(0, 1);
 ?>
 
-<?php
-$projects = [
-    "Входящие",
-    "Учеба",
-    "Работа",
-    "Домашние дела",
-    "Авто"
-];
+
+<?php // Подтянули массив со списком проектов из БД
+$link = mysqli_connect("localhost", "root", "159753Az", "dvp");
+
+if ($link == false) {
+    print("Ошибка: Невозможно подключиться к MySQL " . mysqli_connect_error());
+} else {
+    $sql = 'SELECT `p`.`id_project`, `p`.`name_project`, COUNT(t.name_task) as `task_count`
+FROM `projects` `p`
+       LEFT JOIN `tasks` `t`
+                 ON `t`.`project_id` = `p`.`id_project`
+WHERE `p`.`user_id` = 5
+GROUP BY `p`.`name_project`';
+    $result = mysqli_query($link, $sql);
+    if ($result) {
+        $projects = mysqli_fetch_all($result, MYSQLI_ASSOC);
+    }
+}
 ?>
+
+
+<?php // Подтянули массив со списком задача из БД
+$link = mysqli_connect("localhost", "root", "159753Az", "dvp");
+
+if ($link == false) {
+    print("Ошибка: Невозможно подключиться к MySQL " . mysqli_connect_error());
+} else {
+    $sql = 'SELECT `t`.`id_task`, `t`.`status`, `t`.`name_task`, `t`.`fail`, `t`.`date_of_complition`
+FROM `tasks` `t`';
+    $result = mysqli_query($link, $sql);
+    if (result) {
+        $tasks = mysqli_fetch_all($result, MYSQLI_ASSOC);
+    }
+}
+?>
+
 
 <?php
 require_once('helpers.php');
