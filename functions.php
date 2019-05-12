@@ -5,7 +5,7 @@ function taskCounting($tasks, $projects)
     $count = 0;
     foreach ($tasks as $key => $val)
     {
-        if ($val["category"] === $projects)
+        if ($val["name_project"] === $projects)
         {
             $count++;
         }

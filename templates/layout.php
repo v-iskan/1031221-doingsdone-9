@@ -40,8 +40,8 @@
                     <ul class="main-navigation__list">
                         <?php foreach ($projects as $val): ?>
                         <li class="main-navigation__list-item">
-                            <a class="main-navigation__list-item-link" href="#"><?=$val; ?><?=esc($var);?></a>
-                            <span class="main-navigation__list-item-count"><?=taskCounting($tasks, $val)?><?=esc($var);?></span>
+                            <a class="main-navigation__list-item-link" href="#"><?=esc($val['name_project']);?></a>
+                            <span class="main-navigation__list-item-count"><?=esc($val['task_count']);?></span>
                         </li>
                         <?php endforeach; ?>
                     </ul>
