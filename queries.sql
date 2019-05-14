@@ -100,12 +100,12 @@ UPDATE tasks SET status = 1
 WHERE id_task = 2;
 
 --
---
+-- Получить список из всех проектов для одного пользователя. Объедините проекты с задачами, чтобы посчитать количество задач в каждом проекте и в дальнейшем выводить эту цифру рядом с именем проекта;
 --
 
-SELECT DISTINCT COUNT(t.id_task) as task_count, p.name_project, t.name_task
+SELECT COUNT(t.name_task) as task_count, p.name_project
 FROM projects p
        LEFT JOIN tasks t
                  ON t.project_id = p.id_project
 WHERE p.user_id = 5
-GROUP BY p.name_project, t.name_task;
+GROUP BY p.name_project;
