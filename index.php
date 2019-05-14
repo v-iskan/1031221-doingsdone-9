@@ -57,6 +57,7 @@ $tasks = [
 ];
 
 
+
 // подключение содержимое main - шаблон templates\index.php
 
 $contetnPage = include_template('index.php',
