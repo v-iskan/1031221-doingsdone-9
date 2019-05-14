@@ -128,17 +128,14 @@ function get_noun_plural_form (int $number, string $one, string $two, string $ma
  */
 function include_template($name, array $data = []) {
     $name = 'templates/' . $name;
-    $result = '';
 
     if (!is_readable($name)) {
-        return $result;
+        return 'Такого шаблона не существует: ' . $name;
     }
 
     ob_start();
     extract($data);
     require $name;
 
-    $result = ob_get_clean();
-
-    return $result;
+    return ob_get_clean();
 }
