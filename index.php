@@ -1,66 +1,39 @@
 <?php
-// установили часовой пояс Самара +4GMT
-date_default_timezone_set("Europe/Samara");
-setlocale(LC_TIME,"ru_RUS.utf8");
-?>
 
-<?php
-// показывать или нет выполненные задачи
+error_reporting(E_ALL);// показывать или нет выполненные задачи
+
 $show_complete_tasks = rand(0, 1);
-?>
-
-<?php
-$projects = [
-    "Входящие",
-    "Учеба",
-    "Работа",
-    "Домашние дела",
-    "Авто"
-];
-?>
-
-<?php
 require_once('helpers.php');
 require_once('functions.php'); // подключение файла с функциями
-// массив пунктами меню проектов
-$tasks = [
-    [
-        'task' =>             'Собеседование в IT компании',
-        'dateOfComplition' => '01.12.2018',
-        'category' =>         'Работа',
-        'done' => false,
-    ],
-    [
-        'task' => 'Выполнить тестовое задание',
-        'dateOfComplition' => '25.12.2018',
-        'category' => 'Работа',
-        'done' => false,
-    ],
-    [
-        'task' => 'Сделать задание первого раздела',
-        'dateOfComplition' => '21.12.2018',
-        'category' => 'Учеба',
-        'done' => true,
-    ],
-    [
-        'task' => 'Встреча с другом',
-        'dateOfComplition' => '22.12.2019',
-        'category' => 'Входящие',
-        'done' => false,
-    ],
-    [
-        'task' => 'Купить корм для кота',
-        'dateOfComplition' => null,
-        'category' => 'Домашние дела',
-        'done' => false,
-    ],
-    [
-        'task' => 'Заказать пиццу',
-        'dateOfComplition' => null,
-        'category' => 'Домашние дела',
-        'done' => false,
-    ]
-];
+
+// Подтянули массив со списком проектов из БД
+
+$link = mysqli_connect("localhost", "root", "159753Az", "dvp") or die(include_template('error.php', ['error' => mysqli_connect_error()]));
+
+mysqli_set_charset($link, "utf8");
+$sql = 'SELECT `p`.`id_project`, `p`.`name_project`, COUNT(t.name_task) as `task_count`
+FROM `projects` `p`
+       LEFT JOIN `tasks` `t`
+                 ON `t`.`project_id` = `p`.`id_project`
+WHERE `p`.`user_id` = 5
+GROUP BY `p`.`id_project`, `p`.`name_project`';
+$result = mysqli_query($link, $sql);
+$projects = mysqli_fetch_all($result, MYSQLI_ASSOC);
+
+// Подтянули массив со списком задача из БД
+
+
+$sql = 'SELECT `t`.`id_task`, `t`.`status`, `t`.`name_task`, `t`.`file`, `t`.`date_of_complition`
+FROM `tasks` `t`
+WHERE `t`.`user_id` = 5';
+$result = mysqli_query($link, $sql);
+if ($result) {
+    $tasks = mysqli_fetch_all($result, MYSQLI_ASSOC);
+} else {
+    $error = mysqli_error($link);
+    $content = include_template('error.php', ['error' => $error]);
+
+}
 
 
 
@@ -68,7 +41,7 @@ $tasks = [
 
 $contetnPage = include_template('index.php',
     [
-        'tasks'               => $tasks,
+        'tasks' => $tasks,
         'show_complete_tasks' => $show_complete_tasks,
     ]
 );
@@ -77,10 +50,10 @@ $contetnPage = include_template('index.php',
 
 $namePage = include_template('layout.php',
     [
-        'content'  => $contetnPage,
-        'title'    => "Дела в порядке",
+        'content' => $contetnPage,
+        'title' => "Дела в порядке",
         'projects' => $projects,
-        'tasks'    => $tasks,
+        'tasks' => $tasks,
     ]
 );
 
