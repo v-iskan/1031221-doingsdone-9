@@ -12,3 +12,19 @@ function taskCounting($tasks, $projects)
     }
     return $count;
 };
+
+function esc($var)
+{
+    $text = htmlspecialchars($var);
+
+    return $text;
+};
+
+function dateDiff($date) // функция возвращает разницу между дадами в абсолютных днях
+{
+    $dateDeadline = new DateTime($date); //дата крайнего срока выполнения задачи из массива
+    $dateNow = new DateTime('now'); // датавремя сейчас
+    $interval = $dateNow->diff($dateDeadline); // интервал между датами в абсолютных (a)часа
+    return $interval->format('%R%a');
+};
+
