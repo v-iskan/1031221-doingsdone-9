@@ -34,17 +34,14 @@
 
         <div class="content">
             <section class="content__side">
-                <h2 class="content__side-heading">Проекты</h2>
 
                 <nav class="main-navigation">
                     <ul class="main-navigation__list">
-                        <?php foreach ($projects as $val): ?>
-                            <li class="main-navigation__list-item">
-                                <a class="main-navigation__list-item-link"
-                                   href="index.php?id_project=<?= $val['id_project']; ?>"><?= esc($val['name_project']); ?></a>
-                                <span class="main-navigation__list-item-count"><?= esc($val['task_count']); ?></span>
-                            </li>
-                        <?php endforeach; ?>
+
+                        <li class="main-navigation__list-item">
+                            <a class="main-navigation__list-item-link" href="#"></a>
+                            <span class="main-navigation__list-item-count"></span>
+                        </li>
                     </ul>
                 </nav>
 
@@ -52,7 +49,7 @@
                    href="pages/form-project.html" target="project_add">Добавить проект</a>
             </section>
 
-            <main class="content__main"><?= $content; ?></main>
+            <main class="content__main"><?= $_404; ?></main>
         </div>
     </div>
 </div>
