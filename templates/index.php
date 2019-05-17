@@ -40,5 +40,4 @@
             </tr>
         <?php endif; ?>
     <?php endforeach; ?>
-    <!--показывать следующий тег <tr/>, если переменная $show_complete_tasks равна единице-->
 </table>
